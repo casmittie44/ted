@@ -2,9 +2,9 @@
 #define NODE_H
 
 typedef struct node {
-  int size_of_elt;
-  int len;
-  void *val;
+  int size;   // Size of each elment
+  int len;    // Number of elements
+  void *val;  // Pointer to elements
   struct node *next;
 } node;
 
@@ -16,7 +16,7 @@ node* get_last(node* head);
 node* get_ith(node* head, int index);
 void list_destruct(node* head);
 node* add(node* head,void* new, int size, int length);
-void node_value_replace(node*,void*, int, int);
+void node_modify(node*,void*, int, int);
 void insert_subseq(node*,node*,int);
 void print(node*);  
 #endif

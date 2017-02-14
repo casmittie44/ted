@@ -36,7 +36,7 @@ void* cpyptr(void *ptr, int size, int len) {
 */
 node* list_construct(void* value, int size, int length) {
   node *new = (node*)malloc(sizeof(node));
-  new->size_of_elt = size;
+  new->size = size;
   new->len = length;
   new->val = cpyptr(value, size, length);
   new->next = NULL;
@@ -88,7 +88,7 @@ void list_destruct(node *head) {
    This function adds a node with the given value to the end of the linked list.
    It returns the head of the list, with the new node attached.
    If the passed list is NULL, a new list is constructed. When calling this function
-   with head values that may be NULL, it is important that it NOT be called only for its side effect; 
+  with head values that may be NULL, it is important that it NOT be called only for its side effect; 
    it should be called like this:
        head = add(head, 10);
    This ensures that, if head == NULL we will capture the newly constructed list.
@@ -100,7 +100,7 @@ node* add(node *head, void* value, int size, int length) {
   else {
     node *end = get_last(head);
     node *new = (node*)malloc(sizeof(node));
-    new->size_of_elt = size;
+    new->size = size;
     new->len = length;
     new->val = cpyptr(value, size, length);
     new->next = NULL;
@@ -132,7 +132,7 @@ void print(node *head){
   node *curr = head;
   int count = 0;
   while(curr != NULL){
-    printf("Value: %s\n", curr->val);
+    printf("Value: %s\n", (char*)curr->val);
     curr = (node*)curr->next;
     count++;
   }
@@ -140,9 +140,15 @@ void print(node *head){
   printf("Total nodes: %u\n", count);
 }
 
-void node_value_replace(node* curr, void *new_val, int size, int length){
+/*
+  Replaces the value, size, and length fields of the passed node with
+  new values.
+ */
+void node_modify(node* curr, void *new_val, int size, int length){
   if(curr != NULL){
     free(curr->val);
     curr->val = cpyptr(new_val, size, length);
+    curr->size = size;
+    curr->len = length;
   }
 }
