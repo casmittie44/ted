@@ -103,6 +103,7 @@ node* add(node *head, void* value, int size, int length) {
     new->size = size;
     new->len = length;
     new->val = cpyptr(value, size, length);
+    new->prev = end;
     new->next = NULL;
     end->next = (node*)new;
     return head;

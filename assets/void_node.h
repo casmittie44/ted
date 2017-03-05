@@ -5,6 +5,7 @@ typedef struct node {
   int size;   // Size of each elment
   int len;    // Number of elements
   void *val;  // Pointer to elements
+  struct node *prev;
   struct node *next;
 } node;
 

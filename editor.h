@@ -15,7 +15,6 @@ void buffer_destruct(buffer*);
 void edit_buffer(buffer*);
 int save_node(node*, FILE*);
 int save_buffer(buffer*, const char*);
-char* add_newline(char*, int);
 #endif
 
 
